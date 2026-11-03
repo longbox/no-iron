@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0d0f12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>NO IRON</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<style>
+  :root{
+    --bg:#0d0f12; --card:#161a1f; --card2:#1d2229; --line:#2a313a;
+    --ink:#eef2f6; --dim:#98a3b0; --accent:#ff8a3d; --accent2:#4dd6a8; --danger:#ff5d5d;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+    -webkit-text-size-adjust:100%; touch-action:manipulation; overscroll-behavior-y:contain;}
+  body{padding-bottom:120px;}
+  header{position:sticky; top:0; z-index:20; background:rgba(13,15,18,.96);
+    backdrop-filter:saturate(140%) blur(8px); border-bottom:1px solid var(--line);
+    padding:calc(env(safe-area-inset-top) + 8px) 10px 8px;}
+  .brand{display:flex; align-items:center; gap:8px; padding:0 4px 8px;}
+  .brand h1{font-size:15px; margin:0; letter-spacing:.18em; font-weight:800;}
+  .brand span{font-size:10px; color:var(--dim); letter-spacing:.1em; text-transform:uppercase;}
+  #infobtn{margin-left:auto; background:var(--card); color:var(--dim); border:1px solid var(--line);
+    border-radius:9px; padding:7px 12px; font-size:10.5px; font-weight:800; letter-spacing:.1em;
+    font-family:inherit; text-transform:uppercase;}
+  #infobtn.on{background:var(--accent2); color:#0d1512; border-color:var(--accent2);}
+  nav{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none;}
+  nav::-webkit-scrollbar{display:none;}
+  nav button{flex:0 0 auto; background:var(--card); color:var(--dim); border:1px solid var(--line);
+    border-radius:10px; padding:9px 10px; font-size:11px; font-weight:700; letter-spacing:.03em;
+    font-family:inherit; text-transform:uppercase; min-height:42px; min-width:0;}
+  nav button.on{background:var(--accent); color:#12161b; border-color:var(--accent);}
+  main{padding:12px 10px 0;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:16px; margin-bottom:12px;}
+  .dayhead{margin:0 0 12px;}
+  .dayhead h2{margin:0; font-size:22px; line-height:1.15; letter-spacing:-.01em;}
+  .dayhead p{margin:6px 0 0; color:var(--dim); font-size:12.5px; letter-spacing:.03em;}
+  .block{background:var(--card2); border:1px solid var(--line); border-radius:14px;
+    padding:14px; margin-bottom:12px;}
+  .blabel{display:flex; justify-content:space-between; align-items:center; gap:10px;
+    font-size:11px; letter-spacing:.16em; color:var(--accent2); font-weight:800; margin-bottom:10px;}
+  .blabel em{font-style:normal; color:var(--dim); letter-spacing:.06em; font-weight:600;}
+  .move{font-size:19px; font-weight:650; line-height:1.3; margin:0 0 6px;}
+  .move .reps{color:var(--accent); font-weight:800;}
+  .sub{font-size:13.5px; color:var(--dim); line-height:1.45; margin:0 0 8px;}
+  ul.moves{list-style:none; margin:0; padding:0;}
+  ul.moves li{font-size:17px; font-weight:600; line-height:1.35; padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.05); display:flex; gap:10px; align-items:baseline;}
+  ul.moves li:last-child{border-bottom:0;}
+  ul.moves .n{color:var(--accent); font-variant-numeric:tabular-nums; font-weight:800; min-width:1.6em;}
+  .note{background:rgba(255,138,61,.09); border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0; padding:10px 12px; font-size:13px; line-height:1.5;
+    color:#f0d8c6; margin:10px 0 0;}
+  .note b{color:#ffb37a;}
+  .rungs{margin:10px 0 0; padding:0; list-style:none; counter-reset:r;}
+  .rungs li{counter-increment:r; font-size:14px; color:#c3ccd6; padding:5px 0 5px 26px;
+    position:relative; line-height:1.4;}
+  .rungs li::before{content:counter(r); position:absolute; left:0; top:5px; width:18px; height:18px;
+    border-radius:50%; background:#2b3440; color:#9fb0c2; font-size:11px; font-weight:800;
+    display:flex; align-items:center; justify-content:center;}
+  .sets{display:grid; grid-template-columns:repeat(9,1fr); gap:5px; margin:12px 0 0;}
+  .sets button{border-radius:9px; border:1px solid var(--line);
+    background:#11151a; color:#738293; font-size:13px; font-weight:800; font-family:inherit;
+    padding:0; min-width:0; height:40px;}
+  .sets button.done{background:var(--accent2); border-color:var(--accent2); color:#0d1512;}
+  .row{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;}
+  .btn{flex:1 1 140px; min-height:52px; border-radius:12px; border:1px solid var(--line);
+    background:#11151a; color:var(--ink); font-size:14px; font-weight:700; letter-spacing:.04em;
+    font-family:inherit; display:flex; align-items:center; justify-content:center; gap:7px;}
+  .btn.primary{background:var(--accent); color:#141a20; border-color:var(--accent);}
+  .btn.ghost{background:transparent;}
+  .btn:active{transform:scale(.985);}
+  .goal{margin-top:10px; font-size:12.5px; color:var(--dim); letter-spacing:.04em;}
+  .goal b{color:var(--accent2);}
+  .pips{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0;}
+  .pips button{width:46px; height:46px; border-radius:12px; border:1px solid var(--line);
+    background:#11151a; color:#738293; font-size:14px; font-weight:800; font-family:inherit;}
+  .pips button.done{background:var(--accent2); border-color:var(--accent2); color:#0d1512;}
+  .counter{display:flex; align-items:center; gap:12px; margin-top:12px;}
+  .counter .big{font-size:38px; font-weight:800; font-variant-numeric:tabular-nums;
+    line-height:1; min-width:2ch; text-align:center;}
+  .counter .lbl{font-size:11px; letter-spacing:.14em; color:var(--dim); text-transform:uppercase;}
+  .counter button{width:56px; height:56px; border-radius:50%; border:1px solid var(--line);
+    background:#11151a; color:var(--ink); font-size:26px; font-weight:700; font-family:inherit; line-height:1;}
+  input[type=text],textarea{width:100%; background:#11151a; border:1px solid var(--line);
+    color:var(--ink); border-radius:10px; padding:12px; font-size:15px; font-family:inherit;
+    margin-top:8px;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px;}
+  th,td{text-align:left; padding:9px 6px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{font-size:10.5px; letter-spacing:.12em; color:var(--dim); text-transform:uppercase; font-weight:700;}
+  td:first-child{color:#cfd8e2; width:44%;}
+  td:last-child{color:var(--accent2);}
+  #dock{position:fixed; left:0; right:0; bottom:0; z-index:40; transform:translateY(110%);
+    transition:transform .22s ease; padding:10px 10px calc(10px + env(safe-area-inset-bottom));}
+  #dock.up{transform:translateY(0);}
+  .dockbox{background:#10151b; border:1px solid #333d49; border-radius:18px; padding:14px;
+    box-shadow:0 -18px 40px rgba(0,0,0,.6);}
+  .docktop{display:flex; justify-content:space-between; align-items:baseline; gap:10px;}
+  .docktop .lbl{font-size:11px; letter-spacing:.16em; color:var(--accent2); font-weight:800; text-transform:uppercase;}
+  .docktop .lbl.final{color:var(--danger);}
+  .clock{font-size:64px; font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+    line-height:1; text-align:center; margin:6px 0 12px;}
+  .clock.warn{color:var(--accent);}
+  .clock.over{color:var(--danger);}
+  .dockrow{display:flex; gap:8px;}
+  .dockrow .btn{min-height:50px; flex:1;}
+  .bar{height:5px; background:#232a33; border-radius:3px; overflow:hidden; margin-bottom:10px;}
+  .bar i{display:block; height:100%; background:var(--accent2); width:0; transition:width .2s linear;}
+  .paused .clock{opacity:.45;}
+  footer{padding:18px 6px 30px; text-align:center; font-size:11px; color:#5d6875; letter-spacing:.08em;}
+  @media (min-width:620px){ main{max-width:640px; margin:0 auto;} header>div,nav{max-width:640px; margin:0 auto;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><h1>NO IRON</h1><span>zero-equipment week</span><button id="infobtn" data-go="info">Info</button></div>
+  <nav id="nav"></nav>
+</header>
+<main id="main"></main>
+<footer>Built off the IW 9&times;1:30 + capped-metcon cadence &middot; works offline</footer>
+
+<div id="dock">
+  <div class="dockbox">
+    <div class="docktop"><span class="lbl" id="dlbl">SET 1 / 9</span><span class="lbl" id="dsub"></span></div>
+    <div class="clock" id="dclock">1:30</div>
+    <div class="bar"><i id="dbar"></i></div>
+    <div class="dockrow">
+      <button class="btn ghost" id="dpause">Pause</button>
+      <button class="btn ghost" id="dskip">Skip</button>
+      <button class="btn" id="dstop">Stop</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ---------------- data ---------------- */
+const DAYS = [
+{ key:"mon", tab:"Mon", title:"Tempo Squat / AMRAP 14", meta:"Strength 13:30 + metcon 14:00",
+  strength:{
+    moves:["3 Tempo Air Squats"],
+    sub:"3-sec down, 2-sec pause in the bottom",
+    note:"<b>Add difficulty for 6 sets then stay for 3.</b> Climb one rung per set for sets 1&ndash;6, repeat the rung you hit on set 6 for sets 7&ndash;9.",
+    rungs:["Air squat","5-sec pause at the bottom","1&frac14; squat &mdash; rise a quarter, sink, stand","Tempo split squat, same reps per leg"],
+    finisher:"Then, 1 set max air squats at the set-2 rung &middot; Goal 30+",
+    interval:{rounds:9, work:90}
+  },
+  fitness:{ type:"amrap", cap:840, capLabel:"AMRAP 14:00",
+    moves:["200m Run","12 Alt reverse lunges (6/leg)","10 Sit-ups","8 Burpees"],
+    goal:"Goal: <b>5&ndash;7 rounds</b> &middot; ~2:35 per round" }
+},
+
+{ key:"tue", tab:"Tue", title:"Tempo Push-up / 9 Rounds", meta:"Strength 13:30 + 9 rounds for time, 16:00 cap",
+  strength:{
+    moves:["3 Tempo Push-ups"],
+    sub:"3-sec down, 2-sec pause 1 inch off the floor",
+    note:"<b>Add difficulty for 6 sets then stay for 3.</b> Leverage is your load &mdash; higher hands are easier, higher feet are harder.",
+    rungs:["Hands elevated (sofa / step)","Flat","Feet elevated","Diamond or wide"],
+    finisher:"Then, 1 set max push-ups at the set-2 rung &middot; Goal 15+",
+    interval:{rounds:9, work:90}
+  },
+  fitness:{ type:"rounds", cap:960, capLabel:"9 ROUNDS &middot; 16:00 cap", rounds:9,
+    moves:["100m Run","8 Broad jumps (or tuck jumps)","5 V-ups"],
+    goal:"Goal: <b>finish 12&ndash;14 min</b> &middot; broad jumps stand in for box jumps, land soft" }
+},
+
+{ key:"wed", tab:"Wed", title:"Hinge / AMRAP 10", meta:"Strength 13:30 + metcon 10:00",
+  strength:{
+    moves:["5 Single-leg RDL &mdash; per leg"],
+    sub:"3-sec lower, own the bottom",
+    note:"<b>Add difficulty for 6 sets then stay for 3.</b> This is the deadlift day &mdash; slow eccentric is the whole point.",
+    rungs:["Two-leg glute bridge","Single-leg glute bridge","Single-leg RDL","Hamstring walkout"],
+    finisher:"Then, 1 max single-leg glute bridge hold per side &middot; Goal 45s+",
+    interval:{rounds:9, work:90}
+  },
+  fitness:{ type:"amrap", cap:600, capLabel:"AMRAP 10:00",
+    moves:["200m Run","8 Pike push-ups","12 Hollow rocks","10 Alt split squats"],
+    goal:"Goal: <b>4&ndash;6 rounds</b>" }
+},
+
+{ key:"thu", tab:"Thu", title:"Chipper", meta:"2 rounds &middot; 30:00 cap &middot; fitness only",
+  fitness:{ type:"rounds", cap:1800, capLabel:"2 ROUNDS &middot; 30:00 cap", rounds:2,
+    moves:["800m Run","50 Air squats","40 Sit-ups","30 Burpees","20 Broad jumps"],
+    goal:"Goal: <b>9&ndash;12 min per round</b> &middot; ~21 min total if you keep moving" }
+},
+
+{ key:"fri", tab:"Fri", title:"Ladder", meta:"10-9-8-7-6-5-4-3-2-1 &middot; 18:00 cap",
+  fitness:{ type:"ladder", cap:1080, capLabel:"LADDER &middot; 18:00 cap",
+    moves:["Air squats","Push-ups","V-ups"], reps:[10,9,8,7,6,5,4,3,2,1],
+    goal:"55 reps of each, 165 total &middot; same shape as your 8.11 ladder" }
+},
+
+{ key:"sat", tab:"Wknd", title:"Off / Easy", meta:"No clock",
+  fitness:{ type:"note",
+    goal:"Rest, or 30&ndash;40 min easy walk / jog / bike. No cap, no clock, no logging." }
+},
+
+{ key:"info", tab:"Info", title:"Swap card &amp; rules", meta:"How the doc translated to zero equipment",
+  info:true }
+];
+
+/* ---------------- state ---------------- */
+const KEY = "noiron.v2";
+let S = load();
+function load(){
+  try{ const o = JSON.parse(localStorage.getItem(KEY)||"{}");
+    return {checks:o.checks||{}, rounds:o.rounds||{}, pips:o.pips||{}, results:o.results||{}, day:o.day||"mon"};
+  }catch(e){ return {checks:{},rounds:{},pips:{},results:{},day:"mon"}; }
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* ---------------- audio ---------------- */
+let AC=null;
+function ac(){
+  if(!AC){ const C = window.AudioContext||window.webkitAudioContext; if(!C) return null; AC = new C(); }
+  if(AC.state==="suspended") AC.resume();
+  return AC;
+}
+function beep(freq, dur, vol){
+  const c = ac(); if(!c) return;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = "sine"; o.frequency.value = freq;
+  g.gain.setValueAtTime(0, c.currentTime);
+  g.gain.linearRampToValueAtTime(vol||0.22, c.currentTime+0.012);
+  g.gain.exponentialRampToValueAtTime(0.0008, c.currentTime+(dur||0.12));
+  o.connect(g).connect(c.destination);
+  o.start(); o.stop(c.currentTime+(dur||0.12)+0.02);
+}
+function cue(kind){
+  if(kind==="tick") beep(880, .07, .1);
+  else if(kind==="go"){ beep(660,.11,.2); setTimeout(()=>beep(990,.14,.22),110); }
+  else if(kind==="done"){ beep(520,.16,.24); setTimeout(()=>beep(520,.16,.24),200); setTimeout(()=>beep(780,.4,.26),400); }
+  else if(kind==="over"){ beep(320,.5,.24); }
+}
+
+/* ---------------- timer engine ---------------- */
+const dock = document.getElementById("dock");
+const dlbl = document.getElementById("dlbl"), dsub = document.getElementById("dsub");
+const dclock = document.getElementById("dclock"), dbar = document.getElementById("dbar");
+let T = null;
+
+function fmt(ms){
+  ms = Math.max(0, ms);
+  const s = Math.ceil(ms/1000), m = Math.floor(s/60), r = s%60;
+  return m + ":" + String(r).padStart(2,"0");
+}
+
+function startInterval(rounds, work, dayKey){
+  cue("go");
+  T = {mode:"interval", total:rounds, idx:0, work:work*1000, endAt:Date.now()+work*1000,
+       running:true, lastBeep:99, dayKey:dayKey};
+  dock.classList.add("up"); dock.classList.remove("paused");
+  paint();
+  if(navigator.wakeLock) navigator.wakeLock.request("screen").catch(()=>{});
+  bootLoop();
+}
+function startCap(capSec, label){
+  cue("go");
+  T = {mode:"cap", total:1, idx:0, work:capSec*1000, endAt:Date.now()+capSec*1000,
+       running:true, lastBeep:99, label:label};
+  dock.classList.add("up"); dock.classList.remove("paused");
+  paint();
+  if(navigator.wakeLock) navigator.wakeLock.request("screen").catch(()=>{});
+  bootLoop();
+}
+function stopTimer(){
+  T = null; dock.classList.remove("up","paused");
+  if(dockTimer){ clearInterval(dockTimer); dockTimer=null; }
+}
+function paint(){
+  if(!T) return;
+  const left = T.endAt - Date.now();
+  const secs = Math.ceil(left/1000);
+  if(T.mode==="interval"){
+    dlbl.textContent = "SET " + (T.idx+1) + " / " + T.total;
+    dlbl.classList.toggle("final", T.idx === T.total-1);
+    dsub.textContent = "1:30 CLOCK";
+  }else{
+    dlbl.textContent = "TIME LEFT"; dlbl.classList.remove("final");
+    dsub.textContent = T.label || "";
+  }
+  dclock.textContent = fmt(left);
+  dclock.classList.toggle("warn", left <= 10000 && left > 0);
+  dclock.classList.toggle("over", left <= 0);
+  const pct = Math.max(0, Math.min(1, left / T.work));
+  dbar.style.width = (pct*100).toFixed(1) + "%";
+  dbar.style.background = left <= 10000 ? "var(--accent)" : "var(--accent2)";
+}
+let dockTimer = null;
+function tick(){
+  if(!T) return;
+  const left = T.endAt - Date.now();
+  const secs = Math.ceil(left/1000);
+  if(secs <= 5 && secs > 0 && secs !== T.lastBeep){ beep(760,.06,.12); T.lastBeep = secs; }
+  if(left <= 0){
+    if(T.mode === "interval"){
+      if(T.idx < T.total-1){
+        cue("done");
+        T.idx++; T.endAt = Date.now() + T.work; T.lastBeep = 99;
+      }else{
+        cue("done"); stopTimer(); return;
+      }
+    }else{
+      cue("over"); T.endAt = Date.now(); paint();
+      setTimeout(()=>{ if(T && T.mode==="cap") stopTimer(); }, 1200);
+      clearInterval(dockTimer); dockTimer = null; return;
+    }
+  }
+  paint();
+}
+document.getElementById("dpause").addEventListener("click", e=>{
+  if(!T) return;
+  if(T.running){
+    T.remain = T.endAt - Date.now(); T.running = false;
+    dock.classList.add("paused"); e.target.textContent = "Resume";
+  }else{
+    T.endAt = Date.now() + T.remain; T.running = true;
+    dock.classList.remove("paused"); e.target.textContent = "Pause";
+    if(!dockTimer) dockTimer = setInterval(tick, 150);
+  }
+});
+document.getElementById("dskip").addEventListener("click", ()=>{
+  if(!T) return;
+  if(T.mode==="interval" && T.idx < T.total-1){ T.idx++; T.endAt = Date.now()+T.work; T.lastBeep=99; paint(); }
+  else stopTimer();
+});
+document.getElementById("dstop").addEventListener("click", ()=>stopTimer());
+
+/* one ticking loop, started on the first timer */
+function bootLoop(){
+  if(!dockTimer) dockTimer = setInterval(tick, 150);
+  document.getElementById("dpause").textContent = "Pause";
+}
+
+/* ---------------- render ---------------- */
+const nav = document.getElementById("nav");
+const main = document.getElementById("main");
+
+nav.innerHTML = DAYS.filter(d=>!d.info).map(d =>
+  `<button data-go="${d.key}" class="${d.key===S.day?"on":""}">${d.tab}</button>`
+).join("");
+function go(key){
+  S.day = key; save(); render();
+}
+nav.addEventListener("click", e=>{
+  const b = e.target.closest("button[data-go]"); if(!b) return;
+  go(b.dataset.go);
+});
+document.getElementById("infobtn").addEventListener("click", ()=>go("info"));
+
+function esc(s){ return s; }
+
+function strengthBlock(day){
+  const s = day.strength, k = day.key;
+  const sets = Array.from({length:s.interval.rounds}, (_,i)=>{
+    const done = S.checks[k+"-s"+i] ? "done" : "";
+    return `<button data-set="${i}" class="${done}">${i+1}</button>`;
+  }).join("");
+  return `<div class="block">
+    <div class="blabel"><span>STRENGTH</span><em>Every 1:30 &times; ${s.interval.rounds} sets</em></div>
+    ${s.moves.map(m=>`<p class="move">${m}</p>`).join("")}
+    <p class="sub">${s.sub}</p>
+    <div class="note">${s.note}</div>
+    <ul class="rungs">${s.rungs.map(r=>`<li>${r}</li>`).join("")}</ul>
+    <div class="sets">${sets}</div>
+    <div class="row">
+      <button class="btn primary" data-timer="interval" data-day="${k}">&#9654; Start 1:30 clock</button>
+      <button class="btn ghost" data-reset="${k}">Clear sets</button>
+    </div>
+    <div class="goal">${s.finisher}</div>
+  </div>`;
+}
+
+function fitnessBlock(day){
+  const f = day.fitness, k = day.key;
+  if(f.type === "note"){
+    return `<div class="block"><div class="blabel"><span>REST</span><em>no clock</em></div>
+      <div class="goal">${f.goal}</div></div>`;
+  }
+  let body = "";
+  if(f.type === "ladder"){
+    const rows = f.reps.map((r,i)=>`<div class="sets" style="grid-template-columns:repeat(10,1fr)">
+      <button data-lad="${i}" class="${S.checks[k+"-l"+i]?"done":""}" style="aspect-ratio:auto;min-height:44px">${r}</button></div>`).join("");
+    body = `<ul class="moves">${f.moves.map(m=>`<li>${m}</li>`).join("")}</ul>
+      <div class="sub" style="margin-top:10px">Tap each round as you finish it:</div>${rows}`;
+  } else {
+    body = `<ul class="moves">${f.moves.map(m=>`<li>${m}</li>`).join("")}</ul>`;
+    if(f.type === "amrap"){
+      const n = S.rounds[k]||0;
+      body += `<div class="counter">
+        <button data-rd="-1" data-day="${k}">&minus;</button>
+        <div><div class="big" id="rd-${k}">${n}</div><div class="lbl">rounds</div></div>
+        <button data-rd="1" data-day="${k}">+</button></div>`;
+    } else {
+      const pips = Array.from({length:f.rounds},(_,i)=>
+        `<button data-pip="${i}" data-day="${k}" class="${S.pips[k+"-p"+i]?"done":""}">${i+1}</button>`).join("");
+      body += `<div class="pips">${pips}</div>`;
+    }
+  }
+  return `<div class="block">
+    <div class="blabel"><span>FITNESS</span><em>${f.capLabel}</em></div>
+    ${body}
+    <div class="row"><button class="btn primary" data-timer="cap" data-cap="${f.cap}" data-label="${f.capLabel.replace(/&middot;/g,"·")}" data-day="${k}">&#9654; Start cap</button></div>
+    <div class="goal">${f.goal}</div>
+  </div>`;
+}
+
+const INFO = `<div class="card">
+  <div class="dayhead"><h2>Swap card</h2><p>How each piece of the original doc became equipment-free</p></div>
+  <table>
+    <tr><th>In the doc</th><th>Zero-equipment swap</th></tr>
+    <tr><td>Barbell squat / front squat / OH squat</td><td>Tempo air squat, 1&frac14; squat, pause squat, split squat</td></tr>
+    <tr><td>Deadlift / deficit deadlift / RDL</td><td>Single-leg RDL, glute bridge, hamstring walkout</td></tr>
+    <tr><td>Bench press</td><td>Tempo push-up &mdash; leverage is load</td></tr>
+    <tr><td>Strict press / push press / push jerk</td><td>Pike push-up, feet-elevated pike push-up</td></tr>
+    <tr><td>Clean / snatch / thruster</td><td>Jump squat, burpee</td></tr>
+    <tr><td>Cal bike / row</td><td>200m run = 12&ndash;14 cal &middot; 100m run = 7 cal</td></tr>
+    <tr><td>Box jumps</td><td>Broad jump or tuck jump, same reps</td></tr>
+    <tr><td>Toes to bar / pull-ups / bar MU</td><td>V-ups, hollow rocks, leg raises</td></tr>
+    <tr><td>KB swings / DB RDLs</td><td>Broad jumps, single-leg RDL</td></tr>
+    <tr><td>Double unders</td><td>40 fast feet or line hops</td></tr>
+    <tr><td>Wtd sit-ups / Russian twist</td><td>Sit-ups, hollow rocks</td></tr>
+  </table>
+</div>
+<div class="card">
+  <div class="dayhead"><h2>Rules</h2><p>Progression, scaling, and the one gap</p></div>
+  <ul class="rungs" style="counter-reset:none">
+    <li style="padding-left:0">Too hard &rarr; drop one rung, not the reps.</li>
+    <li style="padding-left:0">Too easy &rarr; rung up, add a 3-sec pause, cut a minute off the cap, add a round &mdash; in that order.</li>
+    <li style="padding-left:0">Weeks 2&ndash;4 &rarr; climb one rung on the strength ladders, shorten each metcon cap by 1 minute.</li>
+    <li style="padding-left:0">No run available &rarr; 200m = 45s high knees; 800m = 3:00 of the same.</li>
+    <li style="padding-left:0">The gap: no pulling. If you ever get a bar or a table edge, add 3 rounds of rows.</li>
+  </ul>
+</div>`;
+
+function render(){
+  const day = DAYS.find(d=>d.key===S.day) || DAYS[0];
+  nav.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset.go===day.key));
+  document.getElementById("infobtn").classList.toggle("on", day.key==="info");
+  if(day.info){ main.innerHTML = INFO; return; }
+  main.innerHTML = `<div class="dayhead"><h2>${day.title}</h2><p>${day.meta}</p></div>
+    ${day.strength ? strengthBlock(day) : ""}
+    ${day.fitness ? fitnessBlock(day) : ""}
+    <div class="card">
+      <div class="blabel"><span>LOG</span><em>saved on this phone</em></div>
+      <textarea id="res" rows="3" placeholder="My result — rounds, times, rung you hit...">${S.results[day.key]||""}</textarea>
+    </div>`;
+  const ta = document.getElementById("res");
+  ta.addEventListener("input", ()=>{ S.results[day.key] = ta.value; save(); });
+}
+
+main.addEventListener("click", e=>{
+  const t = e.target.closest("button"); if(!t) return;
+
+  if(t.dataset.set !== undefined){
+    const k = S.day, id = k+"-s"+t.dataset.set;
+    S.checks[id] = !S.checks[id]; save(); t.classList.toggle("done", !!S.checks[id]); return;
+  }
+  if(t.dataset.lad !== undefined){
+    const k = S.day, id = k+"-l"+t.dataset.lad;
+    S.checks[id] = !S.checks[id]; save(); t.classList.toggle("done", !!S.checks[id]); return;
+  }
+  if(t.dataset.pip !== undefined){
+    const k = t.dataset.day, id = k+"-p"+t.dataset.pip;
+    S.pips[id] = !S.pips[id]; save(); t.classList.toggle("done", !!S.pips[id]); return;
+  }
+  if(t.dataset.rd !== undefined){
+    const k = t.dataset.day;
+    S.rounds[k] = Math.max(0, (S.rounds[k]||0) + parseInt(t.dataset.rd,10));
+    save();
+    const el = document.getElementById("rd-"+k); if(el) el.textContent = S.rounds[k];
+    return;
+  }
+  if(t.dataset.reset){
+    const k = t.dataset.reset;
+    Object.keys(S.checks).forEach(id=>{ if(id.startsWith(k+"-s")) delete S.checks[id]; });
+    save(); render(); return;
+  }
+  if(t.dataset.timer === "interval"){
+    const day = DAYS.find(d=>d.key===t.dataset.day);
+    startInterval(day.strength.interval.rounds, day.strength.interval.work, day.key); return;
+  }
+  if(t.dataset.timer === "cap"){
+    startCap(parseInt(t.dataset.cap,10), t.dataset.label); return;
+  }
+});
+
+/* service worker (ignored when opened from a file://) */
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load", ()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+render();
+</script>
+</body>
+</html>

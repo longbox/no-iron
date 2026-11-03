@@ -1,0 +1,14 @@
+{
+  "name": "No Iron — zero-equipment week",
+  "short_name": "No Iron",
+  "description": "Bodyweight-only training week on the IW 9x1:30 + capped-metcon cadence.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0f12",
+  "theme_color": "#0d0f12",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
