@@ -147,62 +147,67 @@
 /* ---------------- data ---------------- */
 const DAYS = [
 { key:"mon", tab:"Mon", title:"Banded Squat / AMRAP 14", meta:"Strength 13:30 + metcon 14:00",
+  kit:"Kit: straight bands only &middot; mint &rarr; bright &rarr; dark",
   strength:{
     moves:["3 Banded Tempo Squats"],
-    sub:"Band under both feet, over the shoulders &middot; 3-sec down, 2-sec pause in the bottom",
-    note:"<b>Add tension for 6 sets then stay for 3.</b> Bands are load &mdash; set up so the band is already stretched at the top. Harder: shorter grip, double the band, step wider. Easier: lighter band, or stand on the band with a wider stance and less slack pulled out.",
-    rungs:["Light band under feet, over shoulders","Medium band, same setup","Heavy band, same setup","Heavy band doubled &mdash; or 1&frac14; squat at heavy"],
+    sub:"Straight band under both feet, ends held at your shoulders &middot; 3-sec down, 2-sec pause in the bottom",
+    note:"<b>Add tension for 6 sets then stay for 3.</b> A band only loads when it's stretched &mdash; set up so it's already tight at the top of the squat. Harder: choke up (wrap the ends once around each hand), step your feet wider, or run the mint band alongside the dark one.",
+    rungs:["Mint straight band under both feet, ends at your shoulders","Bright green straight band, same setup","Dark green straight band, same setup","Dark green choked up &mdash; ends wrapped once around each hand"],
     finisher:"Then, 1 set max banded squats at the set-2 tension &middot; Goal 30+",
     interval:{rounds:9, work:90}
   },
   fitness:{ type:"amrap", cap:840, capLabel:"AMRAP 14:00",
-    note:"Mountain climbers replace the 200m run. Count each leg as one.",
+    note:"Mountain climbers replace the 200m run &mdash; count each leg as one. RDLs: mint or bright green straight band.",
     moves:["40 Mountain climbers (20/leg)","12 Banded RDLs","10 Sit-ups","8 Burpees"],
     goal:"Goal: <b>5&ndash;7 rounds</b> &middot; ~2:35 per round" }
 },
 
 { key:"tue", tab:"Tue", title:"Banded Push / 9 Rounds", meta:"Strength 13:30 + 9 rounds for time, 16:00 cap",
+  kit:"Kit: 2 straight bands &middot; one for push-ups, one on the door for rows",
   strength:{
     moves:["3 Banded Tempo Push-ups"],
-    sub:"Band across the upper back, ends pinned under your palms &middot; 3-sec down, 2-sec pause an inch off the floor",
-    note:"<b>Add tension for 6 sets then stay for 3.</b> Tension and leverage are both load &mdash; change one at a time, not both.",
-    rungs:["Hands elevated, light band across back","Flat, medium band across back","Flat, heavy band across back","Feet elevated, heavy band across back"],
+    sub:"Straight band across the upper back, ends pinned under your palms &middot; 3-sec down, 2-sec pause an inch off the floor",
+    note:"<b>Add tension for 6 sets then stay for 3.</b> Tension and leverage are both load &mdash; change one at a time. Small loops work here too, but go a colour lighter than you think: a 12&quot; loop feels far heavier than the straight band of the same colour.",
+    rungs:["Hands elevated (sofa / step) + mint band across back","Floor, mint band across back","Floor, bright green across back","Floor, dark green across back &mdash; or feet elevated + mint"],
     finisher:"Then, 1 set max banded push-ups at the set-2 tension &middot; Goal 15+",
     interval:{rounds:9, work:90}
   },
   fitness:{ type:"rounds", cap:960, capLabel:"9 ROUNDS &middot; 16:00 cap", rounds:9,
-    note:"The band rows are your pulling for the week &mdash; this is the gap the no-equipment version couldn't fill. Don't skip them.",
+    note:"The band rows are your pulling for the week &mdash; this is the gap the no-equipment version couldn't fill. Mint band, looped around a closed door handle.",
     moves:["20 Mountain climbers (10/leg)","8 Broad jumps (or 8 step-back lunges/leg)","5 V-ups","10 Band rows"],
     goal:"Goal: <b>finish 12&ndash;14 min</b> &middot; land soft, no run needed" }
 },
 
 { key:"wed", tab:"Wed", title:"Hinge / AMRAP 10", meta:"Strength 13:30 + metcon 10:00",
+  kit:"Kit: 2 straight bands + 1 small loop",
   strength:{
     moves:["5 Banded Single-leg RDL &mdash; per leg"],
-    sub:"Band under the front foot, opposite hand holding the band &middot; 3-sec lower, own the bottom",
-    note:"<b>Add tension for 6 sets then stay for 3.</b> This is the deadlift day &mdash; the slow eccentric is the whole point. Wrap the band once around your hand to shorten it and add tension mid-set.",
-    rungs:["Two-leg banded glute bridge (band above knees)","Single-leg glute bridge, band above knees","Banded single-leg RDL, light band","Banded single-leg RDL, heavy &mdash; or stand on a book for a deficit"],
-    finisher:"Then, 1 max banded glute-bridge hold per side &middot; Goal 45s+",
+    sub:"Straight band under the front foot, opposite hand holding the ends &middot; 3-sec lower, own the bottom",
+    note:"<b>Add tension for 6 sets then stay for 3.</b> This is the deadlift day &mdash; the slow eccentric is the whole point. Shorten the band by wrapping the ends once around your hand to add tension mid-set.",
+    rungs:["Two-leg RDL, mint under both feet","Single-leg RDL, mint under the front foot","Single-leg RDL, bright green","Single-leg RDL, dark green &mdash; or dark + stand on a book for a deficit"],
+    finisher:"Then, 1 max glute-bridge hold per side, dark-green loop above your knees &middot; Goal 45s+",
     interval:{rounds:9, work:90}
   },
   fitness:{ type:"amrap", cap:600, capLabel:"AMRAP 10:00",
-    note:"Mountain climbers replace the 200m run.",
+    note:"Mountain climbers replace the 200m run. Pull-throughs: straight band around a door handle at hip height &mdash; or use the medium loop and hinge back hard.",
     moves:["30 Mountain climbers (15/leg)","12 Banded pull-throughs","8 Pike push-ups","12 Alt split squats"],
     goal:"Goal: <b>4&ndash;6 rounds</b>" }
 },
 
 { key:"thu", tab:"Thu", title:"Chipper", meta:"2 rounds &middot; 30:00 cap &middot; fitness only",
+  kit:"Kit: 1 straight band (rows)",
   fitness:{ type:"rounds", cap:1800, capLabel:"2 ROUNDS &middot; 30:00 cap", rounds:2,
-    note:"The 3:00 high-knee block replaces the 800m run. If you have a jump rope, 150 skips covers it instead.",
+    note:"The 3:00 high-knee block replaces the 800m run. If you have a jump rope, 150 skips covers it instead. Rows: mint band on the door handle, 20 clean reps.",
     moves:["3:00 High knees (steady, not a sprint)","50 Air squats","40 Sit-ups","30 Burpees","20 Broad jumps","20 Band rows"],
     goal:"Goal: <b>9&ndash;12 min per round</b> &middot; ~21 min total if you keep moving" }
 },
 
 { key:"fri", tab:"Fri", title:"Ladder", meta:"10-9-8-7-6-5-4-3-2-1 &middot; 18:00 cap",
+  kit:"Kit: 1 straight band (mint press)",
   fitness:{ type:"ladder", cap:1080, capLabel:"LADDER &middot; 18:00 cap",
-    note:"Squat / press / core, same shape as the NO IRON ladder. Want more pulling? Swap V-ups for band rows.",
-    moves:["Air squats","Banded press (light band, standing)","V-ups"], reps:[10,9,8,7,6,5,4,3,2,1],
-    goal:"55 reps of each, 165 total &middot; step on the band for the press, press overhead tall" }
+    note:"Squat / press / core, same shape as the NO IRON ladder. Stand on the mint straight band, ends in your hands, press overhead tall. Want more pulling? Swap V-ups for band rows.",
+    moves:["Air squats","Banded press (mint straight band)","V-ups"], reps:[10,9,8,7,6,5,4,3,2,1],
+    goal:"55 reps of each, 165 total &middot; bright green instead of mint if 55 presses feels too easy" }
 },
 
 { key:"sat", tab:"Wknd", title:"Off / Easy", meta:"No clock",
@@ -422,10 +427,10 @@ const INFO = `<div class="card">
   <div class="dayhead"><h2>Swap card</h2><p>Barbell work &rarr; band work, and the run &rarr; nothing that leaves the house</p></div>
   <table>
     <tr><th>In the original doc</th><th>Band / in-place version</th></tr>
-    <tr><td>Barbell squat / front squat / OH squat</td><td>Banded tempo squat &mdash; band under both feet, over shoulders. Doubling the band doubles the load.</td></tr>
-    <tr><td>Deadlift / RDL</td><td>Banded single-leg RDL, banded pull-through, glute bridge with band above knees</td></tr>
-    <tr><td>Bench press</td><td>Band push-up &mdash; band across the back, ends pinned under the palms. Tension + leverage is the load.</td></tr>
-    <tr><td>Strict press / push press</td><td>Standing banded press &mdash; stand on the band, press overhead</td></tr>
+    <tr><td>Barbell squat / front squat / OH squat</td><td>Banded tempo squat &mdash; straight band under both feet, ends at your shoulders</td></tr>
+    <tr><td>Deadlift / RDL</td><td>Banded single-leg RDL (straight band), banded pull-through (anchored straight band), glute bridge with the small loop above the knees</td></tr>
+    <tr><td>Bench press</td><td>Band push-up &mdash; straight band across the back, ends pinned under the palms. Tension + leverage is the load.</td></tr>
+    <tr><td>Strict press / push press</td><td>Standing banded press &mdash; stand on a straight band, press overhead</td></tr>
     <tr><td>Rows / pull-ups / T2B</td><td><b>Band rows and band pull-throughs &mdash; this is the gap the no-equipment week couldn't close. Bands fix it.</b></td></tr>
     <tr><td>KB swings</td><td>Banded pull-through, broad jump</td></tr>
     <tr><td>Box jumps</td><td>Broad jump or tuck jump (step-back lunge if you want low impact)</td></tr>
@@ -437,13 +442,22 @@ const INFO = `<div class="card">
   </table>
 </div>
 <div class="card">
-  <div class="dayhead"><h2>Tension guide</h2><p>Bands have no numbers on them &mdash; here's how to load</p></div>
-  <ul class="rungs plain">
-    <li><b>Rough tiers:</b> light &asymp; 10&ndash;15 lb, medium &asymp; 20&ndash;35 lb, heavy &asymp; 40&ndash;60 lb at full stretch. Brands vary wildly &mdash; judge by feel, not the label.</li>
-    <li><b>More resistance:</b> shorter grip &rarr; step out wider &rarr; double the band &rarr; slower tempo. In that order.</li>
+  <div class="dayhead"><h2>Your kit</h2><p>Six bands &mdash; 3 tensions, 2 formats. They are not one ladder.</p></div>
+  <table>
+    <tr><th>Band</th><th>Use it for</th></tr>
+    <tr><td>Mint straight (longest)</td><td>Squats, presses, RDLs, push-ups &mdash; the default starting tension</td></tr>
+    <tr><td>Bright green straight</td><td>Same moves, one step up</td></tr>
+    <tr><td>Dark green straight</td><td>Same moves, hardest straight band</td></tr>
+    <tr><td>Mint small loop</td><td>Glute bridges, lateral walks, pull-aparts, face pulls &mdash; the default loop</td></tr>
+    <tr><td>Bright green small loop</td><td>Same, one step up</td></tr>
+    <tr><td>Dark green small loop</td><td>Same, hardest loop &mdash; glute-bridge holds, monster walks</td></tr>
+  </table>
+  <ul class="rungs plain" style="margin-top:12px">
+    <li><b>Same colour, different format &ne; same tension.</b> A 12&quot; loop stretched 6&quot; has doubled its length; the straight band stretched 6&quot; has barely changed. Treat the loops and the straights as two separate ladders, and expect to use a lighter colour in the loop.</li>
+    <li><b>Long bands only for over-shoulder work.</b> The small loops are too short to go under both feet and over your shoulders &mdash; squat, press and RDL with the straight bands.</li>
+    <li><b>Straights for anchors.</b> Tie a loop knot in one end, shut it in a door or wrap it round a solid door handle at hip height, and you have rows and pull-throughs. The dots on the loops are a brand mark, not a level marking &mdash; read the colour.</li>
+    <li><b>Adding tension without a heavier band:</b> choke up (wrap the end once around your hand or foot) &rarr; step wider &rarr; add the lightest band alongside the heaviest &rarr; slow the tempo. In that order.</li>
     <li><b>All resistance lives in the stretch.</b> Set up with the band already taut &mdash; a slack band at the bottom of a squat is doing nothing. If the top of the rep feels empty, your band is too long, not too light.</li>
-    <li><b>Loop bands</b> (flat, no handles): under feet for squats/RDLs, above knees for glute work. <b>Tube bands with handles:</b> stand on them for presses, anchor for rows and pull-throughs. <b>Pull-up assist bands:</b> work fine for everything above, just be aware they're usually wider and weaker than they look.</li>
-    <li><b>Anchoring a row:</b> a closed door hinge or a solid low post at hip height, pulling toward you. Never anchor to something that can slide, tip, or is above waist height for a horizontal pull.</li>
   </ul>
 </div>
 <div class="card">
@@ -464,6 +478,7 @@ function render(){
   document.getElementById("infobtn").classList.toggle("on", day.key==="info");
   if(day.info){ main.innerHTML = INFO; return; }
   main.innerHTML = `<div class="dayhead"><h2>${day.title}</h2><p>${day.meta}</p></div>
+    ${day.kit ? `<div class="goal" style="margin:-6px 0 12px">${day.kit}</div>` : ""}
     ${day.strength ? strengthBlock(day) : ""}
     ${day.fitness ? fitnessBlock(day) : ""}
     <div class="card">
