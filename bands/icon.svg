@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="96" fill="#0d0f12"/>
+  <!-- stretched band: two anchors with a taut loop between them -->
+  <path d="M96 300 C 170 210, 342 210, 416 300" fill="none" stroke="#ff8a3d"
+        stroke-width="26" stroke-linecap="round"/>
+  <path d="M96 366 C 170 276, 342 276, 416 366" fill="none" stroke="#4dd6a8"
+        stroke-width="26" stroke-linecap="round"/>
+  <circle cx="96" cy="333" r="15" fill="#eef2f6"/>
+  <circle cx="416" cy="333" r="15" fill="#eef2f6"/>
+  <text x="256" y="180" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
+        font-size="74" font-weight="800" fill="#eef2f6" text-anchor="middle" letter-spacing="6">BAND</text>
+</svg>

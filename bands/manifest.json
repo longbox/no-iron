@@ -1,0 +1,14 @@
+{
+  "name": "Band Only — bands, no iron, no running",
+  "short_name": "Band Only",
+  "description": "Band + bodyweight training week on the 9x1:30 + capped-metcon cadence. Zero running, nothing outdoors.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d0f12",
+  "theme_color": "#0d0f12",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
